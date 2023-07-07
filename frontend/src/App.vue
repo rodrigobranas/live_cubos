@@ -9,10 +9,8 @@
 	const todosGateway = inject("todosGateway") as TodosGateway;
 
 	async function loadTodos () {
-		const todosData = await todosGateway.getTodos();
-		for (const todoData of todosData) {
-			todoList.value.addTodo(todoData.description, todoData.done);
-		}
+		const todos = await todosGateway.getTodos();
+		todoList.value.todos = todos;
 	}
 </script>
 <template>

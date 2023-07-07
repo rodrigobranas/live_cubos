@@ -1,3 +1,4 @@
+import Todo from "../../domain/Todo";
 import HttpClient from "../http/HttpClient";
 import TodosGateway from "./TodosGateway";
 
@@ -6,9 +7,13 @@ export default class TodosGatewayHttp implements TodosGateway {
 	constructor (readonly httpClient: HttpClient) {
 	}
 
-	async getTodos(): Promise<any> {
+	async getTodos(): Promise<Todo[]> {
 		const todosData = await this.httpClient.get("http://localhost:3000/todos");
-		return todosData;
+		const todos: Todo[] = [];
+		for (const todoData of todosData) {
+			todos.push(new Todo(todoData.description, todoData.done));
+		}
+		return todos;
 	}
 
 }

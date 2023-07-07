@@ -1,3 +1,5 @@
+import Todo from "../../domain/Todo";
+
 export default interface TodosGateway {
-	getTodos (): Promise<any>;
+	getTodos (): Promise<Todo[]>;
 }

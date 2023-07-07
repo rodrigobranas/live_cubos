@@ -1,6 +1,7 @@
 import { mount } from "@vue/test-utils";
 import AppVue from "../../src/App.vue";
 import TodosGateway from "../../src/infra/gateway/TodosGateway";
+import Todo from "../../src/domain/Todo";
 
 function sleep (time: number) {
 	return new Promise((resolve) => {
@@ -51,11 +52,11 @@ test("Deve testar a todolist adicionando 3 todos e mudar um deles para done", as
 
 test("Deve testar a todolist carregando os todos da api", async function () {
 	const todosGateway: TodosGateway = {
-		async getTodos(): Promise<any> {
+		async getTodos(): Promise<Todo[]> {
 			return [
-				{ description: "A", done: true },
-				{ description: "B", done: false },
-				{ description: "C", done: false }
+				new Todo("A", true),
+				new Todo("B", false),
+				new Todo("C", false)
 			]
 		}
 	}
